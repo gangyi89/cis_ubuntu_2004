@@ -865,21 +865,25 @@
         chain: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_input_name }}"
         jump: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_input_jump }}"
         in_interface: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_input_interface }}"
+      notify:
+        - persist iptables v4 rules
 
     - name: "3.5.3.2.1 | Ensure iptables loopback traffic is configured (Automated) | loopback egress"
       iptables:
         chain: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_output_name }}"
         jump: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_output_jump }}"
         out_interface: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_output_interface }}"
+      notify:
+        - persist iptables v4 rules
 
     - name: "3.5.3.2.1 | Ensure iptables loopback traffic is configured (Automated) | deny on loopback"
       iptables:
         chain: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_inputlocal_name }}"
         jump: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_inputlocal_jump }}"
         source: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_1_params_iptablesloopbackchain_inputlocal_interface }}"
+      notify:
+        - persist iptables v4 rules
 
-  notify:
-    - persist iptables v4 rules
   when:
     - ubuntu_2004_cis_firewall == "iptables"
     - ubuntu_2004_cis_section3_rule_3_5_3_2_1
@@ -899,6 +903,8 @@
         ctstate: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_2_params_input_connections_ctstate }}"
         protocol: "{{ item }}"
       with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_2_params_input_connections_protocols }}"
+      notify:
+        - persist iptables v4 rules
 
 
     - name: "3.5.3.2.2 | Ensure iptables outbound and established connections are configured (Manual) | output"
@@ -908,9 +914,9 @@
         ctstate: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_2_params_output_connections_ctstate }}"
         protocol: "{{ item }}"
       with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_2_params_output_connections_protocols }}"
+      notify:
+        - persist iptables v4 rules
 
-  notify:
-    - persist iptables v4 rules
   when:
     - ubuntu_2004_cis_firewall == "iptables"
     - ubuntu_2004_cis_section3_rule_3_5_3_2_2
@@ -930,6 +936,8 @@
         ctstate: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_4_params_input_connections_ctstate }}"
         destination_port: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_4_params_input_connections_port }}"
         protocol: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_4_params_input_connections_protocols }}"
+      notify:
+        - persist iptables v4 rules
 
 
     - name: "3.5.3.2.4 | Ensure iptables firewall rules exist for all open ports (Automated) | DNS resolver"
@@ -940,9 +948,9 @@
         destination_port: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_4_params_output_connections_port }}"
         protocol: "{{ item }}"
       with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_4_params_output_connections_protocols }}"
+      notify:
+        - persist iptables v4 rules
 
-  notify:
-    - persist iptables v4 rules
   when:
     - ubuntu_2004_cis_firewall == "iptables"
     - ubuntu_2004_cis_section3_rule_3_5_3_2_4
@@ -960,21 +968,25 @@
         chain: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_3_params_iptableschain_input_name }}"
         policy: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_3_params_iptableschain_input_policy }}"
       when: ubuntu_2004_cis_section3_rule_iptables_ipv4_default_deny_input
+      notify:
+        - persist iptables v4 rules
 
     - name: "3.5.3.2.3 | Ensure iptables default deny firewall policy (Automated) | set output chain to drop"
       iptables:
         chain: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_3_params_iptableschain_output_name }}"
         policy: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_3_params_iptableschain_output_policy }}"
       when: ubuntu_2004_cis_section3_rule_iptables_ipv4_default_deny_output
+      notify:
+        - persist iptables v4 rules
 
     - name: "3.5.3.2.3 | Ensure iptables default deny firewall policy (Automated) | set forward chain to drop"
       iptables:
         chain: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_3_params_iptableschain_forward_name }}"
         policy: "{{ ubuntu_2004_cis_section3_rule_3_5_3_2_3_params_iptableschain_forward_policy }}"
       when: ubuntu_2004_cis_section3_rule_iptables_ipv4_default_deny_forward
+      notify:
+        - persist iptables v4 rules
 
-  notify:
-    - persist iptables v4 rules
   when:
     - ubuntu_2004_cis_firewall == "iptables"
     - ubuntu_2004_cis_section3_rule_3_5_3_2_3
@@ -993,6 +1005,8 @@
         jump: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_input_jump }}"
         in_interface: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_input_interface }}"
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_input_ipversion }}"
+      notify:
+        - persist iptables v6 rules
 
     - name: "3.5.3.3.1 | Ensure ip6tables loopback traffic is configured (Automated) | loopback egress"
       iptables:
@@ -1000,6 +1014,8 @@
         jump: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_output_jump }}"
         out_interface: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_output_interface }}"
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_output_ipversion }}"
+      notify:
+        - persist iptables v6 rules
 
     - name: "3.5.3.3.1 | Ensure ip6tables loopback traffic is configured (Automated) | deny on loopback"
       iptables:
@@ -1007,9 +1023,9 @@
         jump: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_inputlocal_jump }}"
         source: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_inputlocal_interface }}"
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_1_params_iptablesloopbackchain_inputlocal_ipversion }}"
+      notify:
+        - persist iptables v6 rules
 
-  notify:
-    - persist iptables v6 rules
   when:
     - ubuntu_2004_cis_require_ipv6
     - ubuntu_2004_cis_firewall == "iptables"
@@ -1031,6 +1047,8 @@
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_2_params_input_connections_ipversion }}"
         protocol: "{{ item }}"
       with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_2_params_input_connections_protocols }}"
+      notify:
+        - persist iptables v6 rules
 
 
     - name: "3.5.3.3.2 | Ensure ip6tables outbound and established connections are configured (Manual) | output"
@@ -1041,9 +1059,9 @@
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_2_params_output_connections_ipversion }}"
         protocol: "{{ item }}"
       with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_2_params_output_connections_protocols }}"
+      notify:
+        - persist iptables v6 rules
 
-  notify:
-    - persist iptables v6 rules
   when:
     - ubuntu_2004_cis_require_ipv6
     - ubuntu_2004_cis_firewall == "iptables"
@@ -1063,6 +1081,8 @@
         policy: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_3_params_iptableschain_input_policy }}"
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_3_params_iptableschain_input_ipversion }}"
       when: ubuntu_2004_cis_section3_rule_iptables_ipv6_default_deny_input
+      notify:
+        - persist iptables v6 rules
 
     - name: "3.5.3.3.3 | Ensure ip6tables default deny firewall policy (Automated) | set output chain to drop"
       iptables:
@@ -1070,6 +1090,8 @@
         policy: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_3_params_iptableschain_output_policy }}"
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_3_params_iptableschain_output_ipversion }}"
       when: ubuntu_2004_cis_section3_rule_iptables_ipv6_default_deny_output
+      notify:
+        - persist iptables v6 rules
 
     - name: "3.5.3.3.3 | Ensure ip6tables default deny firewall policy (Automated) | set forward chain to drop"
       iptables:
@@ -1077,9 +1099,9 @@
         policy: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_3_params_iptableschain_forward_policy }}"
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_3_params_iptableschain_forward_ipversion }}"
       when: ubuntu_2004_cis_section3_rule_iptables_ipv6_default_deny_forward
+      notify:
+        - persist iptables v6 rules
 
-  notify:
-    - persist iptables v6 rules
   when:
     - ubuntu_2004_cis_require_ipv6
     - ubuntu_2004_cis_firewall == "iptables"
@@ -1101,6 +1123,8 @@
         destination_port: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_4_params_input_connections_port }}"
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_4_params_input_connections_ipversion }}"
         protocol: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_4_params_input_connections_protocols }}"
+      notify:
+        - persist iptables v6 rules
 
 
     - name: "3.5.3.3.4 | Ensure ip6tables firewall rules exist for all open ports (Manual) | DNS resolver"
@@ -1112,9 +1136,9 @@
         ip_version: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_4_params_output_connections_ipversion }}"
         protocol: "{{ item }}"
       with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_3_3_4_params_output_connections_protocols }}"
+      notify:
+        - persist iptables v6 rules
 
-  notify:
-    - persist iptables v6 rules
   when:
     - ubuntu_2004_cis_require_ipv6
     - ubuntu_2004_cis_firewall == "iptables"
