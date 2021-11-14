@@ -249,6 +249,14 @@ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwproto_53:
   - udp
 ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwcomment_53: Allow 53 tcp/udp
 
+ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwrule_53_out: allow
+ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwdirection_53_out: out
+ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwport_53_out: '53'
+ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwproto_53_out:
+  - tcp
+  - udp
+ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwcomment_53_out: Allow 53 tcp/udp outbound
+
 
 # Variables for 3.5.1.7
 ubuntu_2004_cis_section3_rule_3_5_1_7: true

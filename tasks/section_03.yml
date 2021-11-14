@@ -525,6 +525,15 @@
         comment: "{{ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwcomment_53 }}"
       with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwproto_53 }}"
 
+    - name: "3.5.1.6 | Ensure ufw firewall rules exist for all open ports (Manual) | 53 DNS Resolver outbound"
+      ufw:
+        rule: "{{ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwrule_53_out }}"
+        direction: "{{ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwdirection_53_out }}"
+        port: "{{ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwport_53_out }}"
+        proto: "{{ item }}"
+        comment: "{{ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwcomment_53_out }}"
+      with_items: "{{ ubuntu_2004_cis_section3_rule_3_5_1_6_params_ufwproto_53_out }}"
+
   when:
     - ubuntu_2004_cis_firewall == "ufw"
     - ubuntu_2004_cis_section3_rule_3_5_1_6
