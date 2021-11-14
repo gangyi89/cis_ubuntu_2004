@@ -239,6 +239,13 @@ ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwdirection: out
 ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwinterface: all
 ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwcomment: Allow all for outbound connections on all interfaces
 
+ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwrule_http: allow
+ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwdirection_http: out
+ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwport_http: '80,443'
+ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwproto_http:
+  - tcp 
+ubuntu_2004_cis_section3_rule_3_5_1_5_params_ufwcomment_http: Allow all for http/https connections on all interfaces
+
 # Variables for 3.5.1.6
 ubuntu_2004_cis_section3_rule_3_5_1_6: true
 
