@@ -559,20 +559,20 @@
 - name: "3.5.1.7 | Ensure ufw default deny firewall policy (Automated)"
   block:
 
-    - name: "3.5.1.7 | Ensure ufw default deny firewall policy (Automated) | UFW GIT Template"
-      template:
-        src: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_src }}"
-        dest: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_dest }}"
-        owner: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_owner }}"
-        group: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_group }}"
-        mode: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_mode }}"
-      when: ubuntu_2004_cis_section3_rule_3_5_1_7_ufw_require_git_profile
+    # - name: "3.5.1.7 | Ensure ufw default deny firewall policy (Automated) | UFW GIT Template"
+    #   template:
+    #     src: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_src }}"
+    #     dest: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_dest }}"
+    #     owner: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_owner }}"
+    #     group: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_group }}"
+    #     mode: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_mode }}"
+    #   when: ubuntu_2004_cis_section3_rule_3_5_1_7_ufw_require_git_profile
 
-    - name: "3.5.1.7 | Ensure ufw default deny firewall policy (Automated) | UFW GIT Profile - Allow"
-      ufw:
-        name: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_name }}"
-        rule: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_rule }}"
-      when: ubuntu_2004_cis_section3_rule_3_5_1_7_ufw_require_git_profile
+    # - name: "3.5.1.7 | Ensure ufw default deny firewall policy (Automated) | UFW GIT Profile - Allow"
+    #   ufw:
+    #     name: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_name }}"
+    #     rule: "{{ ubuntu_2004_cis_section3_rule_3_5_1_7_params_ufw_git_profile_rule }}"
+    #   when: ubuntu_2004_cis_section3_rule_3_5_1_7_ufw_require_git_profile
 
     - name: "3.5.1.7 | Ensure ufw default deny firewall policy (Automated) | UFW HTTP Template"
       template:
